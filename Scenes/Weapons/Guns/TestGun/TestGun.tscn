@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://c5lvxfxcgju6n"]
+
+[ext_resource type="Script" uid="uid://cffx4r0so4da6" path="res://Scenes/Weapons/Guns/BaseGun.gd" id="1_7jscw"]
+[ext_resource type="PackedScene" uid="uid://cw4gur8ukgido" path="res://Scenes/Weapons/Guns/TestGun/BaseBullet.tscn" id="2_mdru1"]
+[ext_resource type="PackedScene" uid="uid://c0ja8vkehdkmq" path="res://Scenes/Weapons/Guns/TestGun/Assets/TestGun.glb" id="2_utlqh"]
+[ext_resource type="Script" uid="uid://52nddxvycuvu" path="res://Scenes/Weapons/Guns/WeaponAnimation.gd" id="4_mdru1"]
+[ext_resource type="PackedScene" uid="uid://ct35x6h8nyyhd" path="res://Scenes/Weapons/Guns/Bullets/BasicBullet.tscn" id="5_6af4w"]
+[ext_resource type="Script" uid="uid://lsymxedetdks" path="res://Scenes/Weapons/Guns/TestGun/muzzle_flash_vfx.gd" id="5_q2j21"]
+[ext_resource type="Texture2D" uid="uid://b4wmi4c6ymlsy" path="res://Scenes/Weapons/Guns/TestGun/Assets/MuzzleFlashTexture.png" id="6_6af4w"]
+
+[sub_resource type="Curve" id="Curve_b1ofc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.4, 0.2683475), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_gfbfg"]
+curve = SubResource("Curve_b1ofc")
+
+[sub_resource type="Curve" id="Curve_bv22r"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.15522388, 0.5083295), 1.7157252, 1.7157252, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_c7cxs"]
+curve = SubResource("Curve_bv22r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jbo0w"]
+angle_min = 95.20001
+angle_max = 95.20001
+gravity = Vector3(0, 0, 0)
+scale_min = 0.79999995
+scale_curve = SubResource("CurveTexture_c7cxs")
+color = Color(1.3528494, 1.193816, 0.99969536, 1)
+alpha_curve = SubResource("CurveTexture_gfbfg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_34nlq"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(1, 0.84283847, 0.48452926, 0.772)
+albedo_texture = ExtResource("6_6af4w")
+
+[sub_resource type="QuadMesh" id="QuadMesh_q2j21"]
+material = SubResource("StandardMaterial3D_34nlq")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nd0vh"]
+
+[node name="TestGun" type="Node3D" unique_id=2001155454 node_paths=PackedStringArray("projectile", "muzzle_position", "fire_direction", "weapon_animator", "vfx_animator")]
+script = ExtResource("1_7jscw")
+projectile = NodePath("Projectile")
+muzzle_position = NodePath("Marker3D")
+fire_direction = NodePath("Marker3D/RayCast3D")
+bullet_behavior = ExtResource("2_mdru1")
+weapon_animator = NodePath("TestGunModel")
+vfx_animator = NodePath("Marker3D/MuzzleFlashVFX")
+
+[node name="TestGunModel" parent="." unique_id=1958452112 instance=ExtResource("2_utlqh")]
+script = ExtResource("4_mdru1")
+
+[node name="Marker3D" type="Marker3D" parent="." unique_id=615676146]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.84792745, -1.885187)
+
+[node name="RayCast3D" type="RayCast3D" parent="Marker3D" unique_id=975731998]
+target_position = Vector3(0, 0, -1)
+
+[node name="MuzzleFlashVFX" type="Node3D" parent="Marker3D" unique_id=626243985]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00031280518, -0.09317136)
+script = ExtResource("5_q2j21")
+
+[node name="MuzzleFlashParticles" type="GPUParticles3D" parent="Marker3D/MuzzleFlashVFX" unique_id=788395938]
+transform = Transform3D(0.60352284, 0.7326734, 0.31456253, -0.64971805, 0.68058, -0.33863994, -0.46219748, -1.1136484e-08, 0.88677704, 0.27824876, -0.31946832, -0.16745865)
+emitting = false
+amount = 4
+lifetime = 0.1
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.7
+process_material = SubResource("ParticleProcessMaterial_jbo0w")
+draw_pass_1 = SubResource("QuadMesh_q2j21")
+
+[node name="MuzzleFlashParticles2" type="GPUParticles3D" parent="Marker3D/MuzzleFlashVFX" unique_id=1106487967]
+transform = Transform3D(-0.74931043, 0.5347947, -0.39054853, -0.4742438, -0.8449817, -0.24718083, -0.46219745, 5.281712e-08, 0.88677704, -0.32892436, -0.23429662, -0.16699994)
+emitting = false
+amount = 4
+lifetime = 0.1
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.7
+process_material = SubResource("ParticleProcessMaterial_jbo0w")
+draw_pass_1 = SubResource("QuadMesh_q2j21")
+
+[node name="MuzzleFlashParticles3" type="GPUParticles3D" parent="Marker3D/MuzzleFlashVFX" unique_id=354347850]
+transform = Transform3D(-0.6035228, -0.7326734, -0.31456235, 0.6497181, -0.68057996, 0.33864003, -0.46219745, 5.281712e-08, 0.88677704, -0.27568808, 0.3463322, -0.16745865)
+emitting = false
+amount = 4
+lifetime = 0.1
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.7
+process_material = SubResource("ParticleProcessMaterial_jbo0w")
+draw_pass_1 = SubResource("QuadMesh_q2j21")
+
+[node name="MuzzleFlashParticles4" type="GPUParticles3D" parent="Marker3D/MuzzleFlashVFX" unique_id=153839371]
+transform = Transform3D(0.7493105, -0.53479457, 0.39054862, 0.4742437, 0.8449817, 0.24718079, -0.46219745, 5.281712e-08, 0.88677704, 0.331485, 0.26116037, -0.16699994)
+emitting = false
+amount = 4
+lifetime = 0.1
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+fixed_fps = 60
+local_coords = true
+trail_lifetime = 0.7
+process_material = SubResource("ParticleProcessMaterial_jbo0w")
+draw_pass_1 = SubResource("QuadMesh_q2j21")
+
+[node name="Projectile" type="Area3D" parent="." unique_id=2126955216]
+transform = Transform3D(0.14, 0, 0, 0, 0.14, 0, 0, 0, 0.14, 0, 0, 0)
+visible = false
+collision_layer = 6
+collision_mask = 6
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Projectile" unique_id=484813519]
+shape = SubResource("SphereShape3D_nd0vh")
+
+[node name="BasicBullet" parent="Projectile" unique_id=1856327520 instance=ExtResource("5_6af4w")]
+transform = Transform3D(-1.0927847e-08, 0, 0.25, 0, 0.25, 0, -0.25, 0, -1.0927847e-08, 0, 0, 0)

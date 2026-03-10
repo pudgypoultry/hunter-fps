@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://bdxtlsv1c6xdg"]
+
+[ext_resource type="PackedScene" uid="uid://ts0mg7nccti1" path="res://Scenes/Player/PlayerTest.tscn" id="1_y8ncq"]
+[ext_resource type="Script" uid="uid://dwfs5ccde45p2" path="res://Scenes/UI/UIController.gd" id="2_gaqdb"]
+[ext_resource type="Texture2D" uid="uid://clrhh2pr4wb56" path="res://Scenes/UI/HealthBar/HealthBarBack.png" id="3_ti018"]
+[ext_resource type="Texture2D" uid="uid://d1gcek6ibykqb" path="res://Scenes/UI/HealthBar/HealthBarOver.png" id="4_u6t3p"]
+[ext_resource type="Texture2D" uid="uid://bq0erttu5rma8" path="res://Scenes/UI/HealthBar/HealthBar.png" id="5_fucb2"]
+[ext_resource type="Texture2D" uid="uid://jo104gt3s3vn" path="res://Scenes/UI/StaminaBar/StaminaBarBack.png" id="6_ukipb"]
+[ext_resource type="Texture2D" uid="uid://pjofe0b523r2" path="res://Scenes/UI/StaminaBar/StaminaBarOver.png" id="7_ns6gl"]
+[ext_resource type="Texture2D" uid="uid://c0fm3sjv6qlth" path="res://Scenes/UI/StaminaBar/StaminaBar.png" id="8_cgmw2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3yh2"]
+albedo_color = Color(0.0015070258, 0, 0.24374998, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a3yh2"]
+material = SubResource("StandardMaterial3D_a3yh2")
+size = Vector3(10, 0.5, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y8ncq"]
+size = Vector3(10, 0.5, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y8ncq"]
+albedo_color = Color(0.24313726, 0.010791245, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gaqdb"]
+material = SubResource("StandardMaterial3D_y8ncq")
+size = Vector3(1, 5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gaqdb"]
+size = Vector3(1, 5, 1)
+
+[sub_resource type="Environment" id="Environment_ukipb"]
+
+[node name="Sandbox" type="Node3D" unique_id=874040581]
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=217239666]
+collision_layer = 7
+collision_mask = 7
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=648650606]
+mesh = SubResource("BoxMesh_a3yh2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1457991266]
+shape = SubResource("BoxShape3D_y8ncq")
+
+[node name="Pillar" type="StaticBody3D" parent="." unique_id=60543868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3723094, 2.41577, -3.7962246)
+collision_layer = 7
+collision_mask = 7
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Pillar" unique_id=1771518689]
+mesh = SubResource("BoxMesh_gaqdb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pillar" unique_id=366358215]
+shape = SubResource("BoxShape3D_gaqdb")
+
+[node name="PlayerTest" parent="." unique_id=1458080736 node_paths=PackedStringArray("hud_control") instance=ExtResource("1_y8ncq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4151931, 0)
+hud_control = NodePath("../CanvasLayer/MarginContainer/VBoxContainer")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=656651528]
+transform = Transform3D(0.26841548, -0.4557282, 0.84868425, 0, 0.88101465, 0.47308904, -0.9633032, -0.12698442, 0.23647797, -6.01338, 2.693142, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1749565825]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=397359971]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer" unique_id=2078913183]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+script = ExtResource("2_gaqdb")
+
+[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=750559457]
+layout_mode = 2
+value = 100.0
+texture_under = ExtResource("3_ti018")
+texture_over = ExtResource("4_u6t3p")
+texture_progress = ExtResource("5_fucb2")
+
+[node name="StaminaBar" type="TextureProgressBar" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=612422907]
+layout_mode = 2
+max_value = 300.0
+value = 300.0
+texture_under = ExtResource("6_ukipb")
+texture_over = ExtResource("7_ns6gl")
+texture_progress = ExtResource("8_cgmw2")
+
+[node name="Reticule" type="Label" parent="CanvasLayer/MarginContainer" unique_id=2081284902]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "+"
+horizontal_alignment = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2144353616]
+environment = SubResource("Environment_ukipb")

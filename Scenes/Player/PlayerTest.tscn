@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://ts0mg7nccti1"]
+
+[ext_resource type="Script" uid="uid://dce7n5dc4awwx" path="res://Scenes/Player/PlayerController.gd" id="1_cwn06"]
+[ext_resource type="Script" uid="uid://07hnvv3psvog" path="res://GeneralScripts/StateManager.gd" id="2_kleso"]
+[ext_resource type="Script" uid="uid://cpugii04246ee" path="res://Scenes/Player/States/BaseMovement.gd" id="3_hgdec"]
+[ext_resource type="Script" uid="uid://c37tb4rjy2ou" path="res://Scenes/Player/States/BaseJump.gd" id="4_yadnk"]
+[ext_resource type="Script" uid="uid://dh1dqstrb8641" path="res://Scenes/Player/States/BaseDash.gd" id="5_xwf8y"]
+[ext_resource type="Script" uid="uid://bito2dsdtk4sp" path="res://Scenes/Player/WeaponManager.gd" id="6_gju82"]
+[ext_resource type="PackedScene" uid="uid://c5lvxfxcgju6n" path="res://Scenes/Weapons/Guns/TestGun/TestGun.tscn" id="7_13qhu"]
+[ext_resource type="Script" uid="uid://dg8olvkl1qv2q" path="res://Scenes/GeneralNodeScenes/HealthNode.gd" id="8_bvcgy"]
+[ext_resource type="Script" uid="uid://bbhmydfs65tv0" path="res://Scenes/Player/StaminaNode.gd" id="9_4erjq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a3yh2"]
+
+[node name="PlayerTest" type="CharacterBody3D" unique_id=1458080736 node_paths=PackedStringArray("movement_state_manager", "camera")]
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+script = ExtResource("1_cwn06")
+movement_state_manager = NodePath("MovementStateManager")
+camera = NodePath("Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1763950540]
+shape = SubResource("CapsuleShape3D_a3yh2")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=372467539]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36331272, 0)
+
+[node name="MovementStateManager" type="Node" parent="." unique_id=862489740 node_paths=PackedStringArray("current_state", "states", "actor_reference")]
+script = ExtResource("2_kleso")
+current_state = NodePath("BaseGroundMovement")
+states = {
+"Dashing": NodePath("BaseDash"),
+"Jumping": NodePath("BaseJump"),
+"Walking": NodePath("BaseGroundMovement")
+}
+actor_reference = NodePath("..")
+
+[node name="BaseGroundMovement" type="Node" parent="MovementStateManager" unique_id=1229764666]
+script = ExtResource("3_hgdec")
+
+[node name="BaseJump" type="Node" parent="MovementStateManager" unique_id=203196865]
+script = ExtResource("4_yadnk")
+
+[node name="BaseDash" type="Node" parent="MovementStateManager" unique_id=164424106]
+script = ExtResource("5_xwf8y")
+
+[node name="WeaponManager" type="Node3D" parent="." unique_id=150524570 node_paths=PackedStringArray("current_gun")]
+script = ExtResource("6_gju82")
+current_gun = NodePath("TestGun")
+
+[node name="TestGun" parent="WeaponManager" unique_id=2001155454 instance=ExtResource("7_13qhu")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.38135296, 0, -0.23908329)
+
+[node name="HealthNode" type="Node" parent="." unique_id=1301260294]
+script = ExtResource("8_bvcgy")
+
+[node name="StaminaNode" type="Node" parent="." unique_id=1153762650]
+script = ExtResource("9_4erjq")

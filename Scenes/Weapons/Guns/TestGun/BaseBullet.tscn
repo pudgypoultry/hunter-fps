@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cw4gur8ukgido"]
+
+[ext_resource type="Script" uid="uid://c5failu6vf2em" path="res://Scenes/Weapons/Guns/Bullets/BaseBullet.gd" id="1_y6o5r"]
+
+[node name="BaseBullet" type="Node" unique_id=3508398]
+script = ExtResource("1_y6o5r")

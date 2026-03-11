@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://1n5gvdp1puot"]
+
+[ext_resource type="Script" uid="uid://bje3o8ymbu4is" path="res://Scenes/Enemies/TestEnemy/BaseEnemy.gd" id="1_m1lps"]
+[ext_resource type="PackedScene" uid="uid://coah00nelei47" path="res://Scenes/Enemies/TestEnemy/TestEnemyModel.tscn" id="2_cer0i"]
+[ext_resource type="PackedScene" uid="uid://cmwvl486sshhe" path="res://GeneralResources/Components/ActorComponents/Interaction/CollisionDamageComponent/CollisionDamageNode.tscn" id="3_ne8dk"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_tbf5y"]
+height = 4.153
+
+[node name="TestEnemy" type="CharacterBody3D" unique_id=1501635087]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_m1lps")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=81908033]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9847915, 0)
+shape = SubResource("CylinderShape3D_tbf5y")
+
+[node name="TestEnemyCerberus" parent="." unique_id=1896038263 instance=ExtResource("2_cer0i")]
+
+[node name="CollisionDamageNode" parent="." unique_id=584501547 instance=ExtResource("3_ne8dk")]

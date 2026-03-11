@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://ts0mg7nccti1"]
 
 [ext_resource type="Script" uid="uid://dce7n5dc4awwx" path="res://Scenes/Player/PlayerController.gd" id="1_cwn06"]
-[ext_resource type="Script" uid="uid://07hnvv3psvog" path="res://GeneralScripts/StateManager.gd" id="2_kleso"]
+[ext_resource type="Script" uid="uid://07hnvv3psvog" path="res://GeneralResources/States/StateManager.gd" id="2_4erjq"]
 [ext_resource type="Script" uid="uid://cpugii04246ee" path="res://Scenes/Player/States/BaseMovement.gd" id="3_hgdec"]
 [ext_resource type="Script" uid="uid://c37tb4rjy2ou" path="res://Scenes/Player/States/BaseJump.gd" id="4_yadnk"]
 [ext_resource type="Script" uid="uid://dh1dqstrb8641" path="res://Scenes/Player/States/BaseDash.gd" id="5_xwf8y"]
 [ext_resource type="Script" uid="uid://bito2dsdtk4sp" path="res://Scenes/Player/WeaponManager.gd" id="6_gju82"]
 [ext_resource type="PackedScene" uid="uid://c5lvxfxcgju6n" path="res://Scenes/Weapons/Guns/TestGun/TestGun.tscn" id="7_13qhu"]
-[ext_resource type="Script" uid="uid://dg8olvkl1qv2q" path="res://Scenes/GeneralNodeScenes/HealthNode.gd" id="8_bvcgy"]
-[ext_resource type="Script" uid="uid://bbhmydfs65tv0" path="res://Scenes/Player/StaminaNode.gd" id="9_4erjq"]
+[ext_resource type="Script" uid="uid://dg8olvkl1qv2q" path="res://GeneralResources/Components/ActorComponents/ActorStats/HealthComponent/HealthNode.gd" id="8_bvcgy"]
+[ext_resource type="Script" uid="uid://bbhmydfs65tv0" path="res://GeneralResources/Components/ActorComponents/ActorStats/StaminaComponent/StaminaNode.gd" id="9_4erjq"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a3yh2"]
 
@@ -26,7 +26,7 @@ shape = SubResource("CapsuleShape3D_a3yh2")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.36331272, 0)
 
 [node name="MovementStateManager" type="Node" parent="." unique_id=862489740 node_paths=PackedStringArray("current_state", "states", "actor_reference")]
-script = ExtResource("2_kleso")
+script = ExtResource("2_4erjq")
 current_state = NodePath("BaseGroundMovement")
 states = {
 "Dashing": NodePath("BaseDash"),

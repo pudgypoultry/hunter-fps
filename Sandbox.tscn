@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://jo104gt3s3vn" path="res://Scenes/UI/StaminaBar/StaminaBarBack.png" id="6_ukipb"]
 [ext_resource type="Texture2D" uid="uid://pjofe0b523r2" path="res://Scenes/UI/StaminaBar/StaminaBarOver.png" id="7_ns6gl"]
 [ext_resource type="Texture2D" uid="uid://c0fm3sjv6qlth" path="res://Scenes/UI/StaminaBar/StaminaBar.png" id="8_cgmw2"]
+[ext_resource type="PackedScene" uid="uid://1n5gvdp1puot" path="res://Scenes/Enemies/TestEnemy/TestEnemyCerberus.tscn" id="9_ns6gl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3yh2"]
 albedo_color = Color(0.0015070258, 0, 0.24374998, 1)
@@ -99,3 +100,7 @@ horizontal_alignment = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2144353616]
 environment = SubResource("Environment_ukipb")
+
+[node name="TestEnemy" parent="." unique_id=1501635087 instance=ExtResource("9_ns6gl")]
+transform = Transform3D(0.645, 0, 0, 0, 0.645, 0, 0, 0, 0.645, -1.270278, 4.4367094, -3.8304965)
+disable_mode = 2

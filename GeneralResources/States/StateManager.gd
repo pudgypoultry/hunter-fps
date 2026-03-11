@@ -7,13 +7,17 @@ class_name StateManager
 @export var current_state : State
 @export var states : Dictionary[String,State]
 @export var actor_reference : CharacterBody3D
+@export var debug : bool = false
 
 signal leaving_state(old_state : State)
 signal entering_state(new_state : State)
 
 
 func _ready() -> void:
-	print("Current Actor Reference: ", actor_reference.name)
+	if !actor_reference:
+		actor_reference = get_parent()
+	if debug:
+		print_debug("Current Actor Reference: ", actor_reference.name)
 	if current_state:
 		current_state.enter_state(null)
 
@@ -31,7 +35,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func change_state(new_state : State):
-	print("Leaving " + current_state.name + " and entering " + new_state.name)
+	if debug:
+		print_debug("Leaving " + current_state.name + " and entering " + new_state.name)
 	current_state.leave_state(new_state)
 	leaving_state.emit(current_state)
 	var old_state = current_state

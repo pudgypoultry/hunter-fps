@@ -6,13 +6,13 @@ extends State
 @export var deceleration : float = 35.0
 
 
-func state_process(delta : float) -> void:
-	super(delta)
-	if Input.is_action_just_pressed("jump") && actor_reference.can_jump:
-		change_state("Jumping")
-	if Input.is_action_just_pressed("dash") && actor_reference.can_dash:
-		actor_reference.stamina_component.spend_stamina(actor_reference.dash_cost)
-		change_state("Dashing")
+#func state_process(delta : float) -> void:
+	#super(delta)
+	#if Input.is_action_just_pressed("jump") && actor_reference.can_jump:
+		#change_state("Jumping")
+	#if Input.is_action_just_pressed("dash") && actor_reference.can_dash:
+		#actor_reference.stamina_component.spend_stamina(actor_reference.dash_cost)
+		#change_state("Dashing")
 
 
 func enter_state(last_state : State):

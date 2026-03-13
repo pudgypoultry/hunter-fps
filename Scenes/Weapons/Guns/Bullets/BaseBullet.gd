@@ -8,6 +8,11 @@ var bullet_speed : float
 var bullet_lifetime : float = 10.0
 var lifetime_timer : float = 0.0
 
+
+func _ready() -> void:
+	GameManager.bullet_list.append(self)
+
+
 func _physics_process(delta: float) -> void:
 	if prepared:
 		actor_reference.position += direction * bullet_speed * 0.1
@@ -26,3 +31,8 @@ func prepare(dir : Vector3, speed : float, lifetime : float, parent_gun : BaseGu
 
 func clean_up():
 	actor_reference.queue_free()
+
+
+func _notification(alert):
+	if (alert == NOTIFICATION_PREDELETE):
+		GameManager.bullet_list.erase(self)

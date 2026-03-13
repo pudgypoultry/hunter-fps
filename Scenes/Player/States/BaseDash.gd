@@ -6,9 +6,11 @@ extends State
 @export var rotation_bounds : float = 89.0
 
 var dash_direction : Vector3 = Vector3.FORWARD
+var dash_timer : float = 0.0
 
 
 func enter_state(old_state : State):
+	dash_timer = 0.0
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction := (actor_reference.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y))
 	if direction.length() == 0:
@@ -25,6 +27,10 @@ func enter_state(old_state : State):
 
 func leave_state(new_state : State):
 	actor_reference.velocity = Vector3.ZERO
+
+
+func state_process(delta : float):
+	dash_timer += delta
 
 
 func state_physics_process(delta):

@@ -11,6 +11,7 @@ var dash_cost : float = 100.0
 var can_jump : bool = true
 var can_dash : bool = true
 var can_shoot : bool = true
+var can_be_damaged : bool = true
 
 var health_component : HealthComponent
 var stamina_component : StaminaComponent
@@ -21,6 +22,9 @@ var has_weapon_ammo_component_equipped : bool = false
 var has_weapon_charge_component_equipped : bool = false
 
 
+func _ready() -> void:
+	GameManager.player_reference = self
+
 
 func _process(delta : float) -> void:
 	if stamina_component.current_stamina >= dash_cost:
@@ -29,9 +33,12 @@ func _process(delta : float) -> void:
 		can_dash = false 
 
 
-func damage_player(amount) -> void:
-	if health_component:
-		health_component.damage_me(amount)
+func damage_me(amount) -> bool:
+	if can_be_damaged:
+		if health_component:
+			health_component.damage_me(amount)
+			return true
+	return false
 
 
 func spend_stamina(amount) -> void:

@@ -23,6 +23,7 @@ signal gun_ready
 
 
 func _ready() -> void:
+	GameManager.gun_list.append(self)
 	if !weapon_manager:
 		weapon_manager = get_parent()
 	gun_ready.connect(weapon_manager._on_gun_ready)
@@ -70,3 +71,8 @@ func _on_hit(body : Node3D, bullet : BaseBullet):
 	print(bullet.name + " found something: " + body.name)
 	active_bullets.erase(bullet)
 	bullet.clean_up()
+
+
+func _notification(alert):
+	if (alert == NOTIFICATION_PREDELETE):
+		GameManager.gun_list.erase(self)

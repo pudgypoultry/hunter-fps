@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ts0mg7nccti1"]
 
 [ext_resource type="Script" uid="uid://dce7n5dc4awwx" path="res://Scenes/Player/PlayerController.gd" id="1_cwn06"]
-[ext_resource type="Script" uid="uid://07hnvv3psvog" path="res://GeneralResources/States/StateManager.gd" id="2_4erjq"]
+[ext_resource type="Script" uid="uid://w57kolxofvvx" path="res://Scenes/Player/States/PlayerStateManager.gd" id="2_4erjq"]
 [ext_resource type="Script" uid="uid://cpugii04246ee" path="res://Scenes/Player/States/BaseMovement.gd" id="3_hgdec"]
 [ext_resource type="Script" uid="uid://c37tb4rjy2ou" path="res://Scenes/Player/States/BaseJump.gd" id="4_yadnk"]
 [ext_resource type="Script" uid="uid://dh1dqstrb8641" path="res://Scenes/Player/States/BaseDash.gd" id="5_xwf8y"]
@@ -9,13 +9,22 @@
 [ext_resource type="PackedScene" uid="uid://c5lvxfxcgju6n" path="res://Scenes/Weapons/Guns/TestGun/TestGun.tscn" id="7_13qhu"]
 [ext_resource type="Script" uid="uid://dg8olvkl1qv2q" path="res://GeneralResources/Components/ActorComponents/ActorStats/HealthComponent/HealthNode.gd" id="8_bvcgy"]
 [ext_resource type="Script" uid="uid://bbhmydfs65tv0" path="res://GeneralResources/Components/ActorComponents/ActorStats/StaminaComponent/StaminaNode.gd" id="9_4erjq"]
+[ext_resource type="PackedScene" uid="uid://cmwvl486sshhe" path="res://GeneralResources/Components/ActorComponents/Interaction/CollisionDamageComponent/CollisionDamageNode.tscn" id="10_y71vu"]
+[ext_resource type="Script" uid="uid://dwfs5ccde45p2" path="res://Scenes/UI/UIController.gd" id="11_orhrc"]
+[ext_resource type="Texture2D" uid="uid://clrhh2pr4wb56" path="res://Scenes/UI/HealthBar/HealthBarBack.png" id="12_ks3aj"]
+[ext_resource type="Texture2D" uid="uid://d1gcek6ibykqb" path="res://Scenes/UI/HealthBar/HealthBarOver.png" id="13_3cv5o"]
+[ext_resource type="Texture2D" uid="uid://bq0erttu5rma8" path="res://Scenes/UI/HealthBar/HealthBar.png" id="14_i2lth"]
+[ext_resource type="Texture2D" uid="uid://jo104gt3s3vn" path="res://Scenes/UI/StaminaBar/StaminaBarBack.png" id="15_sl202"]
+[ext_resource type="Texture2D" uid="uid://pjofe0b523r2" path="res://Scenes/UI/StaminaBar/StaminaBarOver.png" id="16_7mlf1"]
+[ext_resource type="Texture2D" uid="uid://c0fm3sjv6qlth" path="res://Scenes/UI/StaminaBar/StaminaBar.png" id="17_e10nr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a3yh2"]
 
-[node name="PlayerTest" type="CharacterBody3D" unique_id=1458080736 node_paths=PackedStringArray("movement_state_manager", "camera")]
+[node name="PlayerTest" type="CharacterBody3D" unique_id=1458080736 node_paths=PackedStringArray("hud_control", "movement_state_manager", "camera")]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_cwn06")
+hud_control = NodePath("CanvasLayer/MarginContainer/VBoxContainer")
 movement_state_manager = NodePath("MovementStateManager")
 camera = NodePath("Camera3D")
 
@@ -56,3 +65,43 @@ script = ExtResource("8_bvcgy")
 
 [node name="StaminaNode" type="Node" parent="." unique_id=1153762650]
 script = ExtResource("9_4erjq")
+
+[node name="CollisionDamageNode" parent="." unique_id=584501547 instance=ExtResource("10_y71vu")]
+scale_difference = 1.2
+can_be_damaged = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1117595629]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=389349864]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer" unique_id=964608299]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+script = ExtResource("11_orhrc")
+
+[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1389160847]
+layout_mode = 2
+value = 100.0
+texture_under = ExtResource("12_ks3aj")
+texture_over = ExtResource("13_3cv5o")
+texture_progress = ExtResource("14_i2lth")
+
+[node name="StaminaBar" type="TextureProgressBar" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=253052944]
+layout_mode = 2
+max_value = 300.0
+value = 300.0
+texture_under = ExtResource("15_sl202")
+texture_over = ExtResource("16_7mlf1")
+texture_progress = ExtResource("17_e10nr")
+
+[node name="Reticule" type="Label" parent="CanvasLayer/MarginContainer" unique_id=972506230]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "+"
+horizontal_alignment = 1

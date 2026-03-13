@@ -11,13 +11,13 @@ var jump_counter : int = 0
 
 
 
-func state_process(delta):
-	super(delta)
-	if actor_reference.is_on_floor():
-		change_state("Walking")
-	if Input.is_action_just_pressed("dash") && actor_reference.can_dash:
-		actor_reference.stamina_component.spend_stamina(actor_reference.dash_cost)
-		change_state("Dashing")
+#func state_process(delta):
+	#super(delta)
+	#if actor_reference.is_on_floor():
+		#change_state("Walking")
+	#if Input.is_action_just_pressed("dash") && actor_reference.can_dash:
+		#actor_reference.stamina_component.spend_stamina(actor_reference.dash_cost)
+		#change_state("Dashing")
 
 
 func state_physics_process(delta):

@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://nv8pl6svwoyi"]
+
+[ext_resource type="PackedScene" uid="uid://ts0mg7nccti1" path="res://Scenes/Player/PlayerTest.tscn" id="1_elgin"]
+[ext_resource type="PackedScene" uid="uid://busva3bfg41g" path="res://Scenes/Environment/BaseWall.tscn" id="2_klai4"]
+
+[node name="Cube_1x1x1" type="Node3D" unique_id=1086223362]
+
+[node name="PlayerTest" parent="." unique_id=1458080736 instance=ExtResource("1_elgin")]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1317560999]
+omni_range = 371.715
+
+[node name="Floor" parent="." unique_id=19323386 instance=ExtResource("2_klai4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.5, 0)
+
+[node name="Ceiling" parent="." unique_id=1066890308 instance=ExtResource("2_klai4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, 0)
+
+[node name="EastWall" parent="." unique_id=432000626 instance=ExtResource("2_klai4")]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 7.5, 3.278354e-07, 0)
+
+[node name="SouthWall" parent="." unique_id=1229654071 instance=ExtResource("2_klai4")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 3.278354e-07, 7.5)
+
+[node name="WestWall" parent="." unique_id=297881439 instance=ExtResource("2_klai4")]
+transform = Transform3D(4.371139e-08, 1, -8.742278e-08, 1, -4.371139e-08, 0, -3.821371e-15, -8.742278e-08, -1, -7.5, 3.278354e-07, 6.556708e-07)
+
+[node name="NorthWall" parent="." unique_id=2028530097 instance=ExtResource("2_klai4")]
+transform = Transform3D(-1, 8.742278e-08, 3.821371e-15, 0, -4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, -6.556708e-07, 3.278354e-07, -7.5)

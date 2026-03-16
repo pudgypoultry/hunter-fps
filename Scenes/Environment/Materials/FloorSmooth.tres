@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://1px2ttn05gti"]
+
+[ext_resource type="Texture2D" uid="uid://cf4a57w6p0v8l" path="res://Scenes/Environment/Materials/FloorSmooth_albedo.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://bqmjn4vo5wbv3" path="res://Scenes/Environment/Materials/FloorSmooth_orm.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://dokk0apt1tyoe" path="res://Scenes/Environment/Materials/FloorSmooth_normal.png" id="3"]
+
+[resource]
+albedo_texture = ExtResource("1")
+roughness_texture = ExtResource("2")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3")
+uv1_triplanar = true

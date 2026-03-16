@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cxqwluyrvc3xs"]
+
+[ext_resource type="Script" uid="uid://dyk0ga0r8kusu" path="res://GeneralResources/Components/ActorComponents/Effects/BloodSplatterComponent/BloodSplatterNode.gd" id="1_q4w0r"]
+[ext_resource type="PackedScene" uid="uid://clmjte8mprfef" path="res://Scenes/Environment/Effects/BloodSplatter/BloodSplatterNode.tscn" id="2_c8lgs"]
+[ext_resource type="Texture2D" uid="uid://rgiafsffwty4" path="res://Scenes/Environment/Effects/BloodSplatter/BloodSplatter1.png" id="2_k6rgi"]
+[ext_resource type="Texture2D" uid="uid://c18yeuhfb734v" path="res://Scenes/Environment/Effects/BloodSplatter/BloodSplatter2.png" id="3_c8lgs"]
+[ext_resource type="Texture2D" uid="uid://ckivn173gqoim" path="res://Scenes/Environment/Effects/BloodSplatter/BloodSplatter3.png" id="4_h7j4y"]
+
+[node name="BloodSplatterComponent" type="Node" unique_id=542102727]
+script = ExtResource("1_q4w0r")
+blood_splatter_decal = ExtResource("2_c8lgs")
+blood_textures = Array[Texture2D]([ExtResource("2_k6rgi"), ExtResource("3_c8lgs"), ExtResource("4_h7j4y")])

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Hunter-FPS"
-run/main_scene="uid://bdxtlsv1c6xdg"
+run/main_scene="uid://nv8pl6svwoyi"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 

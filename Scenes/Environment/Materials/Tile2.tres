@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://cx2o5yx6gvtvh"]
+
+[ext_resource type="Texture2D" uid="uid://c4tkhe04opf1p" path="res://Scenes/Environment/Materials/Tile2_albedo.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://cbg1mhfuafnfs" path="res://Scenes/Environment/Materials/Tile2_orm.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bk7avb872174t" path="res://Scenes/Environment/Materials/Tile2_normal.png" id="3"]
+
+[resource]
+albedo_texture = ExtResource("1")
+roughness_texture = ExtResource("2")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3")
+uv1_offset = Vector3(0, -0.055, 0)
+uv1_triplanar = true

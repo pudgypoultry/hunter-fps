@@ -55,6 +55,7 @@ func handle_collision(body : Area3D, damage : float):
 	var collision_detector = body.get_parent()
 	if collision_detector.can_be_damaged && !recently_collided:
 		collision_detector.damage_me(damage)
+		recently_collided = true
 	else:
 		if debug:
 			print_debug(actor_reference.name + " collided with " + body.name)

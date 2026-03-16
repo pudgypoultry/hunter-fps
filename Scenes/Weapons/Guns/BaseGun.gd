@@ -9,6 +9,7 @@ class_name BaseGun
 @export var projectile_speed : float = 10.0
 @export var bullet_lifetime : float = 2.0
 @export var fire_interval : float = 0.5
+@export var damage_amount : float = 5.0
 @export var weapon_animator : WeaponAnimation
 @export var vfx_animator : AttackVFX
 @export var player_reference : PlayerController
@@ -69,6 +70,8 @@ func unequip_gun():
 
 func _on_hit(body : Node3D, bullet : BaseBullet):
 	print(bullet.name + " found something: " + body.name)
+	if body is BaseEnemy:
+		body.damage_me(damage_amount, bullet.actor_reference.position, -bullet.actor_reference.basis.z)
 	active_bullets.erase(bullet)
 	bullet.clean_up()
 
